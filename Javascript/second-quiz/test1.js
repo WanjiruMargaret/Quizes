@@ -1,17 +1,24 @@
-function lengthOfLongestSubstring(s) {
-  let set = new Set();
-  let start = 0;
-  let maxLength = 0;
+function lengthOfSubstring(s){
+    let longest = 0;
 
-  for (let end = 0; end < s.length; end++) {
-    while (set.has(s[end])) {
-      set.delete(s[start]);
-      start++;
+    for(let i = 0; i < s.length; i++){
+        let seen = "";
+
+        for (let j = i; j < s.length; j++){
+            let char = s[j];
+
+            if (seen.includes(char)){
+                break;
+            }else{
+                seen += char;
+                longest = Math.max(longest,seen.length);
+            }
+        }
     }
+    return longest;
+} 
 
-    set.add(s[end]);
-    maxLength = Math.max(maxLength, end - start + 1);
-  }
-
-  return maxLength;
-}
+console.log(lengthOfSubstring("bbbbb"));
+console.log(lengthOfSubstring("pwwkew"));
+console.log(lengthOfSubstring("abcabcbb"));  
+console.log(lengthOfSubstring(""));
